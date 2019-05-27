@@ -281,9 +281,14 @@ def play_playlist(playlist_name):
 
     # Retreve the content of all playlists in a users library
     all_playlists = api.get_all_user_playlist_contents()
-
-    # Get the closest match
-    best_match = api.closest_match(playlist_name, all_playlists)
+    
+    for playlist in playlists:
+        app.logger.debug("Matching playlist %s to %s" % (playlist['name'], playlist_name))
+        if playlist['name'].lower() == playlist_name.lower():
+            best_match = playlist
+            break
+    else:
+        best_match = None
 
     if best_match is None:
         return statement(render_template("play_playlist_no_match"))
