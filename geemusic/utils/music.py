@@ -256,7 +256,7 @@ class GMusicWrapper(object):
         # key
         if 'track' in track:
             track = track['track']
-            self.log(json.dumps(track))
+        self.log(json.dumps(track))
 
         if self.use_store and 'storeId' in track:
             return track, track['storeId']
